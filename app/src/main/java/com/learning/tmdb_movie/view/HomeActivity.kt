@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.learning.tmdb_movie.adapter.MovieAdapter
+import com.learning.tmdb_movie.adapter.CustomMovieAdapter
 import com.learning.tmdb_movie.databinding.ActivityHomeBinding
 import com.learning.tmdb_movie.viewmodel.MovieViewModel
 import kotlinx.coroutines.launch
@@ -25,14 +25,14 @@ class HomeActivity : AppCompatActivity() {
             }
         }
         viewModel.popularList.observe(this){
-            binding.rvPopularMovies.adapter = MovieAdapter(it)
+            binding.rvPopularMovies.adapter = CustomMovieAdapter(it)
             Log.d("PopularList", it.toString())
         }
         viewModel.nowPlayingList.observe(this){
-            binding.rvNowPlayingMovies.adapter = MovieAdapter(it)
+            binding.rvNowPlayingMovies.adapter = CustomMovieAdapter(it)
         }
         viewModel.upComingList.observe(this){
-            binding.rvUpcomingMovies.adapter = MovieAdapter(it)
+            binding.rvUpcomingMovies.adapter = CustomMovieAdapter(it)
         }
         viewModel.errorStatus.observe(this){
             Log.d("Error", it.toString())

@@ -8,15 +8,15 @@ import com.bumptech.glide.Glide
 import com.learning.tmdb_movie.databinding.ListItemMovieBinding
 import com.learning.tmdb_movie.model.CustomMovieModel
 
-class MovieAdapter(val movieList : List<CustomMovieModel>) : RecyclerView.Adapter<MovieAdapter.PopularMovieViewHolder>(){
+class CustomMovieAdapter(val movieList : List<CustomMovieModel>) : RecyclerView.Adapter<CustomMovieAdapter.CustomMovieViewHolder>(){
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PopularMovieViewHolder = PopularMovieViewHolder(ListItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    ): CustomMovieViewHolder = CustomMovieViewHolder(ListItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(
-        holder: PopularMovieViewHolder,
+        holder: CustomMovieViewHolder,
         position: Int
     ){
        holder.bind(movieList[position])
@@ -24,8 +24,9 @@ class MovieAdapter(val movieList : List<CustomMovieModel>) : RecyclerView.Adapte
 
     override fun getItemCount(): Int = movieList.size
 
-    inner class PopularMovieViewHolder (val binding : ListItemMovieBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class CustomMovieViewHolder (val binding : ListItemMovieBinding) : RecyclerView.ViewHolder(binding.root){
 
+        @SuppressLint("SetTextI18n")
         fun bind(movie : CustomMovieModel) = with(binding){
             tvTitle.text = movie.title
             tvRating.text = "${movie.voteAverage}%"

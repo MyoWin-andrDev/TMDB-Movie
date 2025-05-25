@@ -2,8 +2,6 @@ package com.learning.tmdb_movie.repository
 
 import com.learning.tmdb_movie.Util.getErrorMessage
 import com.learning.tmdb_movie.model.CustomMovieModel
-import com.learning.tmdb_movie.model.NowPlayingResultsModel
-import com.learning.tmdb_movie.model.UpComingResultModel
 import com.learning.tmdb_movie.service.network.reponse.APIService
 import com.learning.tmdb_movie.service.network.reponse.RetrofitInstance
 

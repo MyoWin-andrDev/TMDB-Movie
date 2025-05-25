@@ -6,6 +6,7 @@ import com.learning.tmdb_movie.Util.LANGUAGE
 import com.learning.tmdb_movie.Util.NOW_PLAYING_ENDPOINT
 import com.learning.tmdb_movie.Util.PAGE
 import com.learning.tmdb_movie.Util.RECOMMEND_ENDPOINT
+import com.learning.tmdb_movie.Util.UPCOMING_ENDPOINT
 import com.learning.tmdb_movie.model.NowPlayingResponse
 import com.learning.tmdb_movie.model.PopularResponse
 import com.learning.tmdb_movie.model.UpcomingResponse
@@ -43,6 +44,7 @@ interface APIService {
     ) : Response<NowPlayingResponse>
 
     //UpComing Request
+    @GET(UPCOMING_ENDPOINT)
     suspend fun getUpComingList(
         @Header("Authorization")
         auth : String = AUTHENTICATION,
