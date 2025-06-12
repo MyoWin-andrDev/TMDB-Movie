@@ -1,7 +1,7 @@
 package com.learning.tmdb_movie.repository
 
 import com.learning.tmdb_movie.Util.getErrorMessage
-import com.learning.tmdb_movie.model.CustomMovieModel
+import com.learning.tmdb_movie.model.MovieEntityModel
 import com.learning.tmdb_movie.service.network.reponse.APIService
 import com.learning.tmdb_movie.service.network.reponse.RetrofitInstance
 
@@ -10,8 +10,8 @@ class MovieRepository {
         RetrofitInstance.getInstance().create(APIService::class.java)
     }
 
-    suspend fun getPopularList(): Result<List<CustomMovieModel>> = try {
-        var popularList = ArrayList<CustomMovieModel>()
+    suspend fun getPopularList(): Result<List<MovieEntityModel>> = try {
+        var popularList = ArrayList<MovieEntityModel>()
         val response = apiService.getPopularList()
         when {
             response.isSuccessful && response.body() != null -> {
@@ -25,8 +25,8 @@ class MovieRepository {
             Result.failure(e)
     }
 
-    suspend fun getNowPlayingList() : Result<List<CustomMovieModel>> = try {
-        val nowPlayingList = ArrayList<CustomMovieModel>()
+    suspend fun getNowPlayingList() : Result<List<MovieEntityModel>> = try {
+        val nowPlayingList = ArrayList<MovieEntityModel>()
         val response = apiService.getNowPlayingList()
         when {
             response.isSuccessful && response.body() != null -> {
@@ -39,8 +39,8 @@ class MovieRepository {
         Result.failure(e)
     }
 
-    suspend fun getUpComingList() : Result<List<CustomMovieModel>> = try {
-        val upComingList = ArrayList<CustomMovieModel>()
+    suspend fun getUpComingList() : Result<List<MovieEntityModel>> = try {
+        val upComingList = ArrayList<MovieEntityModel>()
         val response = apiService.getUpComingList()
         when {
             response.isSuccessful && response.body() != null -> {

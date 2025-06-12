@@ -2,7 +2,7 @@ package com.learning.tmdb_movie.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CustomMovieModel(
+data class MovieEntityModel(
 
     @SerializedName("overview")
     val overview: String? = null,

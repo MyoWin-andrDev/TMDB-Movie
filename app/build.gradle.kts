@@ -57,4 +57,7 @@ dependencies {
     // Glide for image loading
     implementation ("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+    //Arrow
+    implementation(platform("io.arrow-kt:arrow-stack:2.1.0"))
+    implementation("io.arrow-kt:arrow-core:2.1.0")
 }

@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.learning.tmdb_movie.databinding.ListItemMovieBinding
-import com.learning.tmdb_movie.model.CustomMovieModel
+import com.learning.tmdb_movie.model.MovieEntityModel
 
-class CustomMovieAdapter(val movieList : List<CustomMovieModel>) : RecyclerView.Adapter<CustomMovieAdapter.CustomMovieViewHolder>(){
+class MovieListAdapter(val movieList : List<MovieEntityModel>) : RecyclerView.Adapter<MovieListAdapter.CustomMovieViewHolder>(){
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -27,7 +27,7 @@ class CustomMovieAdapter(val movieList : List<CustomMovieModel>) : RecyclerView.
     inner class CustomMovieViewHolder (val binding : ListItemMovieBinding) : RecyclerView.ViewHolder(binding.root){
 
         @SuppressLint("SetTextI18n")
-        fun bind(movie : CustomMovieModel) = with(binding){
+        fun bind(movie : MovieEntityModel) = with(binding){
             tvTitle.text = movie.title
             tvRating.text = "${movie.voteAverage}%"
             Glide.with(root.context)

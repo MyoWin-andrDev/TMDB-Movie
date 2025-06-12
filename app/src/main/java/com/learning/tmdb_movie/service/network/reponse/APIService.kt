@@ -7,9 +7,9 @@ import com.learning.tmdb_movie.Util.NOW_PLAYING_ENDPOINT
 import com.learning.tmdb_movie.Util.PAGE
 import com.learning.tmdb_movie.Util.RECOMMEND_ENDPOINT
 import com.learning.tmdb_movie.Util.UPCOMING_ENDPOINT
-import com.learning.tmdb_movie.model.NowPlayingResponse
-import com.learning.tmdb_movie.model.PopularResponse
-import com.learning.tmdb_movie.model.UpcomingResponse
+import com.learning.tmdb_movie.model.Movie.NowPlayingResponse
+import com.learning.tmdb_movie.model.Movie.PopularResponse
+import com.learning.tmdb_movie.model.Movie.UpcomingResponse
 import retrofit2.Response
 
 import retrofit2.http.GET
