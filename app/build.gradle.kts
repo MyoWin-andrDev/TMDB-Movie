@@ -60,4 +60,6 @@ dependencies {
     //Arrow
     implementation(platform("io.arrow-kt:arrow-stack:2.1.0"))
     implementation("io.arrow-kt:arrow-core:2.1.0")
+    //OKHTTP Interceptor(To Know Error On Network Calls)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 }

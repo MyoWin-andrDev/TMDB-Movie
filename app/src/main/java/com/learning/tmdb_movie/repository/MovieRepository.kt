@@ -1,56 +1,28 @@
 package com.learning.tmdb_movie.repository
 
 import com.learning.tmdb_movie.Util.getErrorMessage
+import com.learning.tmdb_movie.Util.safeApiCall
 import com.learning.tmdb_movie.model.MovieEntityModel
-import com.learning.tmdb_movie.service.network.reponse.APIService
+import com.learning.tmdb_movie.service.network.reponse.MovieAPIService
 import com.learning.tmdb_movie.service.network.reponse.RetrofitInstance
 
 class MovieRepository {
-    private val apiService: APIService by lazy {
-        RetrofitInstance.getInstance().create(APIService::class.java)
+    private val apiService: MovieAPIService by lazy {
+        RetrofitInstance.getInstance().create(MovieAPIService::class.java)
     }
 
-    suspend fun getPopularList(): Result<List<MovieEntityModel>> = try {
-        var popularList = ArrayList<MovieEntityModel>()
-        val response = apiService.getPopularList()
-        when {
-            response.isSuccessful && response.body() != null -> {
-                popularList.addAll(response.body()!!.results!!.filterNotNull())
-                Result.success(popularList)
-            }
+    suspend fun getPopularList(): Result<List<MovieEntityModel>> = safeApiCall(
+        apiCall = { apiService.getPopularList() },
+        onSuccess = { it.results!!.filterNotNull() }
+    )
 
-            else -> Result.failure(Exception(response.getErrorMessage()))
-        }
-    } catch (e: Exception) {
-            Result.failure(e)
-    }
+    suspend fun getNowPlayingList(): Result<List<MovieEntityModel>> = safeApiCall(
+        apiCall = { apiService.getNowPlayingList() },
+        onSuccess = { it.results!!.filterNotNull() }
+    )
 
-    suspend fun getNowPlayingList() : Result<List<MovieEntityModel>> = try {
-        val nowPlayingList = ArrayList<MovieEntityModel>()
-        val response = apiService.getNowPlayingList()
-        when {
-            response.isSuccessful && response.body() != null -> {
-                nowPlayingList.addAll(response.body()!!.results!!.filterNotNull())
-                Result.success(nowPlayingList)
-            }
-            else -> Result.failure(Exception(response.getErrorMessage()))
-        }
-    } catch (e : Exception){
-        Result.failure(e)
-    }
-
-    suspend fun getUpComingList() : Result<List<MovieEntityModel>> = try {
-        val upComingList = ArrayList<MovieEntityModel>()
-        val response = apiService.getUpComingList()
-        when {
-            response.isSuccessful && response.body() != null -> {
-                upComingList.addAll(response.body()!!.results!!.filterNotNull())
-                Result.success(upComingList)
-            }
-            else -> Result.failure(Exception(response.getErrorMessage()))
-        }
-    } catch (e : Exception){
-        Result.failure(e)
-    }
-
+    suspend fun getUpComingList(): Result<List<MovieEntityModel>> = safeApiCall(
+        apiCall = { apiService.getUpComingList() },
+        onSuccess = { it.results!!.filterNotNull() }
+    )
 }

@@ -16,7 +16,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
-interface APIService {
+interface MovieAPIService {
     //Recommend Request
     @GET(RECOMMEND_ENDPOINT)
     suspend fun getPopularList (

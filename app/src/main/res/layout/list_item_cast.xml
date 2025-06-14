@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cvMain"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="140dp"
     android:layout_height="290dp"
     android:layout_marginEnd="8dp"
@@ -32,34 +32,10 @@
             android:textStyle="bold"
             android:ellipsize="end"
             android:maxLines="2"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
             app:layout_constraintTop_toBottomOf="@id/iv_poster"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tbFavorite"/>
-
-        <ToggleButton
-            android:id="@+id/tbFavorite"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/ic_favourite"
-            android:layout_marginTop="8dp"
-            android:textOff=""
-            android:textOn=""
-            app:layout_constraintStart_toStartOf="@id/tvTitle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp"/>
-
-        <TextView
-            android:id="@+id/tvRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="7.0%"
-            android:textSize="16sp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintTop_toTopOf="@id/tbFavorite"
-            app:layout_constraintStart_toEndOf="@id/tbFavorite"
-            app:layout_constraintBottom_toBottomOf="@id/tbFavorite"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

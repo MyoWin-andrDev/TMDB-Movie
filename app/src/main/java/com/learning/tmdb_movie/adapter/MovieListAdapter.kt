@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.learning.tmdb_movie.Util.IMAGE_BASE_URL
 import com.learning.tmdb_movie.databinding.ListItemMovieBinding
 import com.learning.tmdb_movie.model.MovieEntityModel
 
-class MovieListAdapter(val movieList : List<MovieEntityModel>) : RecyclerView.Adapter<MovieListAdapter.CustomMovieViewHolder>(){
+class MovieListAdapter(val movieList : List<MovieEntityModel> , val onItemClick : (movieId : Int) -> Unit) : RecyclerView.Adapter<MovieListAdapter.CustomMovieViewHolder>(){
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -31,8 +32,9 @@ class MovieListAdapter(val movieList : List<MovieEntityModel>) : RecyclerView.Ad
             tvTitle.text = movie.title
             tvRating.text = "${movie.voteAverage}%"
             Glide.with(root.context)
-                .load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
+                .load(IMAGE_BASE_URL + movie.posterPath)
                 .into(ivPoster)
+            cvMain.setOnClickListener { onItemClick(movie.id!!) }
         }
     }
 }

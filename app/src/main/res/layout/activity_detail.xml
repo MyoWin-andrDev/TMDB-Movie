@@ -12,12 +12,13 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/tvBackdrop"
+            android:id="@+id/ivBackdrop"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clDetails"
@@ -25,7 +26,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvBackdrop"
+            app:layout_constraintTop_toBottomOf="@id/ivBackdrop"
             android:padding="16dp">
 
             <!-- Movie Title -->
@@ -58,11 +59,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Thr 56min | Action, Science Fiction, Horror"
+                android:text="1hr 56min | Action, Science Fiction, Horror"
+                android:maxLines="2"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 app:layout_constraintTop_toBottomOf="@id/tvReleaseInfo"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                android:paddingEnd="24dp"/>
 
             <ToggleButton
                 android:id="@+id/tbFavorite"
@@ -164,11 +167,26 @@
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCast"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="290dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCastTitle"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvCast"
+                android:text="Book Tickets"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
