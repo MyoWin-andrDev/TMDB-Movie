@@ -30,13 +30,13 @@ class HomeActivity : AppCompatActivity() {
             }
         }
         viewModel.popularList.observe(this){
-            binding.rvPopularMovies.adapter = MovieListAdapter(it){id -> navigateToDetail(id)}
+            binding.rvPopularMovies.rvMain.adapter = MovieListAdapter(it){id -> navigateToDetail(id)}
         }
         viewModel.nowPlayingList.observe(this){
-            binding.rvNowPlayingMovies.adapter = MovieListAdapter(it){id -> navigateToDetail(id)}
+            binding.rvNowPlayingMovies.rvMain.adapter = MovieListAdapter(it){id -> navigateToDetail(id)}
         }
         viewModel.upComingList.observe(this){
-            binding.rvUpcomingMovies.adapter = MovieListAdapter(it){id -> navigateToDetail(id)}
+            binding.rvUpcomingMovies.rvMain.adapter = MovieListAdapter(it){id -> navigateToDetail(id)}
         }
         viewModel.errorStatus.observe(this){
             Log.d("Error", it.toString())

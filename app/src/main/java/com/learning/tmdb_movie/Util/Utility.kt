@@ -1,8 +1,14 @@
 package com.learning.tmdb_movie.Util
 
 import android.content.Context
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 
 fun Response<*>.getErrorMessage() : String =
@@ -34,4 +40,12 @@ suspend fun <T, R> safeApiCall(
     catch (e : Exception){
         Result.failure(Exception(e.message))
     }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun formatDate(inputDate : String) : String {
+    //Parse Input Format
+    val date = LocalDate.parse(inputDate)
+    val dateFormatter = DateTimeFormatter.ofPattern("MMM d,yyyy")
+    return date.format(dateFormatter)
 }

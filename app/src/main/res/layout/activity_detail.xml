@@ -170,15 +170,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <include
                 android:id="@+id/rvCast"
                 android:layout_width="match_parent"
-                android:layout_height="290dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvCastTitle"/>
+                android:layout_height="300dp"
+                layout="@layout/rv_layout"/>
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="0dp"
