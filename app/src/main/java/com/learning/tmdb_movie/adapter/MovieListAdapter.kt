@@ -9,7 +9,7 @@ import com.learning.tmdb_movie.Util.IMAGE_BASE_URL
 import com.learning.tmdb_movie.databinding.ListItemMovieBinding
 import com.learning.tmdb_movie.model.MovieEntityModel
 
-class MovieListAdapter(val movieList : List<MovieEntityModel> , val onItemClick : (movieId : Int) -> Unit) : RecyclerView.Adapter<MovieListAdapter.CustomMovieViewHolder>(){
+class MovieListAdapter(val movieList : List<MovieEntityModel> , val onItemClick : (movieId : Int) -> Unit, val isFavourite : (isFavourite : Boolean) -> Unit ) : RecyclerView.Adapter<MovieListAdapter.CustomMovieViewHolder>(){
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -35,6 +35,7 @@ class MovieListAdapter(val movieList : List<MovieEntityModel> , val onItemClick 
                 .load(IMAGE_BASE_URL + movie.posterPath)
                 .into(ivPoster)
             cvMain.setOnClickListener { onItemClick(movie.id!!) }
+            tbFavorite.setOnClickListener { isFavourite }
         }
     }
 }

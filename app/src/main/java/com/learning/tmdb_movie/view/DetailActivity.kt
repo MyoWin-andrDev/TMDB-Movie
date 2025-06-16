@@ -17,6 +17,7 @@ import com.learning.tmdb_movie.Util.IMAGE_BASE_URL
 import com.learning.tmdb_movie.Util.INTENT_ID
 import com.learning.tmdb_movie.Util.formatDate
 import com.learning.tmdb_movie.Util.showToast
+import com.learning.tmdb_movie.adapter.CastAdapter
 import com.learning.tmdb_movie.databinding.ActivityDetailBinding
 import com.learning.tmdb_movie.model.MovieDetail.DetailResponse
 import com.learning.tmdb_movie.viewmodel.CreditViewModel
@@ -61,15 +62,18 @@ class DetailActivity : AppCompatActivity() {
         //Credit ViewModel
         creditViewModel.castList.observe(this){ either ->
             either.fold(
-                ifLeft = {errorMsg -> showToast(errorMsg)},
+                ifLeft = {errorMsg -> showToast(errorMsg)
+                    Log.d("CastList", errorMsg)},
                 ifRight = {castList ->
-                    binding.rvCast.rvMain.adapter =
+                    binding.rvCast.rvMain.adapter = CastAdapter(castList)
+                    Log.d("CastList", castList.toString())
                 }
             )
 
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupData() = with(binding){
         detailResponse?.let { it ->
             //Backdrop Path

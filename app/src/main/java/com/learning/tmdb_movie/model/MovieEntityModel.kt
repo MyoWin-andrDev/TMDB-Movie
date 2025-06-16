@@ -1,6 +1,7 @@
 package com.learning.tmdb_movie.model
 
 import com.google.gson.annotations.SerializedName
+import com.learning.tmdb_movie.model.MovieDetail.Favourite
 
 data class MovieEntityModel(
 
@@ -44,5 +45,7 @@ data class MovieEntityModel(
     val adult: Boolean? = null,
 
     @SerializedName("vote_count")
-    val voteCount: Int? = null
+    val voteCount: Int? = null,
+
+    val isFavourite : Favourite? = null
 )
