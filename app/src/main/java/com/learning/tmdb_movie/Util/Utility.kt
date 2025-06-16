@@ -42,7 +42,6 @@ suspend fun <T, R> safeApiCall(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun formatDate(inputDate : String) : String {
     //Parse Input Format
     val date = LocalDate.parse(inputDate)

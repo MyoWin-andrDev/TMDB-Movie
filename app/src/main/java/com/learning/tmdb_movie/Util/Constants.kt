@@ -19,3 +19,9 @@ const val ACCEPT = "application/json"
 //API PARAMS
 const val LANGUAGE = "en-US"
 const val PAGE = 1
+//Favourite Collection
+const val FAV_COLLECTION = "FAVOURITES"
+//Operation Status
+const val ADD_MSG = "Added to favourite"
+const val REMOVE_MSG = "Removed from favourite"
+const val FAILED_MSG = "Favorite update failed"

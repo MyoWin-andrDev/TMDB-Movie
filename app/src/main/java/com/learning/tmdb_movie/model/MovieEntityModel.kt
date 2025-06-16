@@ -1,7 +1,6 @@
 package com.learning.tmdb_movie.model
 
 import com.google.gson.annotations.SerializedName
-import com.learning.tmdb_movie.model.MovieDetail.Favourite
 
 data class MovieEntityModel(
 

@@ -35,9 +35,7 @@ data class DetailResponse(
 	val title: String? = null,
 
 	@field:SerializedName("vote_count")
-	val voteCount: Int? = null,
-
-	val isFavourite : Favourite? = null
+	val voteCount: Int? = null
 )
 
 data class SpokenLanguagesItem(
