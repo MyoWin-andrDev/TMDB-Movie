@@ -43,6 +43,8 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setupFavoriteToggle() {
+        binding.tbFavorite.setOnCheckedChangeListener(null)
+        binding.tbFavorite.isChecked = false
         binding.tbFavorite.setOnCheckedChangeListener { _, isChecked ->
             lifecycleScope.launch {
                 detailViewModel.detailMovie.value?.fold(
@@ -108,7 +110,7 @@ class DetailActivity : AppCompatActivity() {
             loadBackdropImage(details.backdropPath)
             tvMovieTitle.text = details.title
             tvReleaseInfo.text = formatReleaseInfo(details)
-            tvRating.text = details.voteAverage.toString()
+            tvRating.text = "${details.voteAverage}%"
             tvVotes.text = "${details.voteCount} votes"
             tvLanguage.text = details.spokenLanguages?.firstOrNull()?.name
             tvDescription.text = details.overview

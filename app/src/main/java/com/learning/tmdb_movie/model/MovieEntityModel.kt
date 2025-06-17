@@ -35,7 +35,7 @@ data class MovieEntityModel(
     val popularity: Any? = null,
 
     @SerializedName("vote_average")
-    val voteAverage: Any? = null,
+    val voteAverage: Double? = null,
 
     @SerializedName("id")
     val id: Int? = null,

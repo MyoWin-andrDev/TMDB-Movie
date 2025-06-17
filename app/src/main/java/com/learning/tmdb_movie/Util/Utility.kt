@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import kotlin.math.round
 
 
 fun Response<*>.getErrorMessage() : String =
@@ -45,6 +46,12 @@ suspend fun <T, R> safeApiCall(
 fun formatDate(inputDate : String) : String {
     //Parse Input Format
     val date = LocalDate.parse(inputDate)
-    val dateFormatter = DateTimeFormatter.ofPattern("MMM d,yyyy")
+    val dateFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy")
     return date.format(dateFormatter)
+}
+
+fun Double.roundToDecimal(decimals: Int): Double {
+    var multiplier = 1.0
+    repeat(decimals) { multiplier *= 10 }
+    return round(this * multiplier) / multiplier
 }
