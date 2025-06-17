@@ -17,22 +17,27 @@ import com.learning.tmdb_movie.viewmodel.FavouriteViewModel
 import com.learning.tmdb_movie.viewmodel.MovieViewModel
 
 class HomeActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityHomeBinding
     private val movieViewModel: MovieViewModel by viewModels()
-    private val favouriteViewModel : FavouriteViewModel by viewModels()
+    private val favouriteViewModel: FavouriteViewModel by viewModels()
     private val adapters = mutableListOf<MovieListAdapter>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        initializeBinding()
         setupObservers()
-        loadData()
+        loadInitialData()
     }
 
-    private fun loadData() {
+    private fun initializeBinding() {
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
+
+    private fun loadInitialData() {
         lifecycleScope.launchWhenStarted {
-            movieViewModel.apply {
+            with(movieViewModel) {
                 getPopularList()
                 getNowPlayingList()
                 getUpComingList()
@@ -41,53 +46,58 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
-        movieViewModel.popularList.observe(this) { movies ->
-            createOrUpdateAdapter(movies, binding.rvPopularMovies.rvMain)
-        }
+        observeMovieLists()
+        observeFavourites()
+    }
 
-        movieViewModel.nowPlayingList.observe(this) { movies ->
-            createOrUpdateAdapter(movies, binding.rvNowPlayingMovies.rvMain)
-        }
+    private fun observeMovieLists() {
+        movieViewModel.popularList.observe(this) { updateMovieList(it, binding.rvPopularMovies.rvMain) }
+        movieViewModel.nowPlayingList.observe(this) { updateMovieList(it, binding.rvNowPlayingMovies.rvMain) }
+        movieViewModel.upComingList.observe(this) { updateMovieList(it, binding.rvUpcomingMovies.rvMain) }
+    }
 
-        movieViewModel.upComingList.observe(this) { movies ->
-            createOrUpdateAdapter(movies, binding.rvUpcomingMovies.rvMain)
-        }
-
+    private fun observeFavourites() {
         favouriteViewModel.favouriteList.observe(this) { response ->
             response.fold(
-                { error -> showToast(error) },
-                { favList -> updateAllAdapters(favList) }
+                ::showToast,
+                ::updateAllAdapters
             )
         }
     }
 
-    private fun createOrUpdateAdapter(
+    private fun updateMovieList(movies: List<MovieEntityModel>, recyclerView: RecyclerView) {
+        val adapter = getOrCreateAdapter(movies, recyclerView)
+        adapter.updateMovieList(movies)
+    }
+
+    private fun getOrCreateAdapter(
         movies: List<MovieEntityModel>,
         recyclerView: RecyclerView
-    ) {
-        val adapter = recyclerView.adapter as? MovieListAdapter ?: createAdapter(movies)
-        adapter.updateMovieList(movies)
-        if (recyclerView.adapter == null) {
-            recyclerView.adapter = adapter
-            adapters.add(adapter)
+    ): MovieListAdapter {
+        return (recyclerView.adapter as? MovieListAdapter) ?: createNewAdapter(movies, recyclerView)
+    }
+
+    private fun createNewAdapter(
+        movieList: List<MovieEntityModel>,
+        recyclerView: RecyclerView
+    ): MovieListAdapter {
+        return MovieListAdapter(
+            movieList = movieList,
+            favouriteList = getCurrentFavourites(),
+            onItemClick = ::navigateToDetail,
+            toggleFavouriteClick = favouriteViewModel::toggleFavourite
+        ).also {
+            recyclerView.adapter = it
+            adapters.add(it)
         }
     }
 
-    private fun createAdapter(movieList: List<MovieEntityModel>): MovieListAdapter {
-        return MovieListAdapter(
-            movieList = movieList,
-            favouriteList = (favouriteViewModel.favouriteList.value as? Either.Right)?.value ?: emptyList(),
-            onItemClick = { id -> navigateToDetail(id) },
-            toggleFavouriteClick = { movieFav ->
-                favouriteViewModel.toggleFavourite(movieFav)
-            }
-        )
+    private fun getCurrentFavourites(): List<FavouriteResponse> {
+        return (favouriteViewModel.favouriteList.value as? Either.Right)?.value ?: emptyList()
     }
 
     private fun updateAllAdapters(favList: List<FavouriteResponse>) {
-        adapters.forEach { adapter ->
-            adapter.updateFavourites(favList)
-        }
+        adapters.forEach { it.updateFavourites(favList) }
     }
 
     private fun navigateToDetail(id: Int) {

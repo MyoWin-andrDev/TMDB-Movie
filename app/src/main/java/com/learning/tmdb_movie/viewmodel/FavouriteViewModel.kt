@@ -12,8 +12,9 @@ import com.learning.tmdb_movie.Util.INIT_LOAD_FAILED
 import com.learning.tmdb_movie.Util.REAL_TIME_ERROR
 import com.learning.tmdb_movie.Util.TOGGLE_ERROR
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FavouriteViewModel() : ViewModel() {
+class FavouriteViewModel : ViewModel() {
 
     private val repository = FavouriteRepository()
 
@@ -27,16 +28,26 @@ class FavouriteViewModel() : ViewModel() {
         loadInitialData()
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        snapshotListener?.remove()
+    }
+
+    fun toggleFavourite(movieFav: FavouriteResponse) {
+        viewModelScope.launch {
+            repository.toggleFavorite(movieFav)
+                .onFailure { e ->
+                    postError(TOGGLE_ERROR + e.message)
+                }
+        }
+    }
+
     private fun setupRealTimeUpdates() {
         snapshotListener?.remove()
         snapshotListener = repository.getFavouritesLiveData { result ->
             result.fold(
-                onSuccess = { favs ->
-                    _favouriteList.postValue(Either.Right(favs))
-                },
-                onFailure = { e ->
-                    _favouriteList.postValue(Either.Left(e.message ?: REAL_TIME_ERROR))
-                }
+                onSuccess = { favs -> postSuccess(favs) },
+                onFailure = { e -> postError(e.message ?: REAL_TIME_ERROR) }
             )
         }
     }
@@ -45,30 +56,17 @@ class FavouriteViewModel() : ViewModel() {
         viewModelScope.launch {
             repository.getInitialFavourites()
                 .fold(
-                    onSuccess = { favs ->
-                        _favouriteList.postValue(Either.Right(favs))
-                    },
-                    onFailure = { e ->
-                        _favouriteList.postValue(Either.Left(e.message ?: INIT_LOAD_FAILED))
-                    }
+                    onSuccess = { favs -> postSuccess(favs) },
+                    onFailure = { e -> postError(e.message ?: INIT_LOAD_FAILED) }
                 )
         }
     }
 
-    fun toggleFavourite(movieFav: FavouriteResponse) {
-        viewModelScope.launch {
-            repository.toggleFavorite(movieFav)
-                .fold(
-                    onSuccess = { /* Listener will handle update */ },
-                    onFailure = { e ->
-                        _favouriteList.postValue(Either.Left(TOGGLE_ERROR + e.message))
-                    }
-                )
-        }
+    private fun postSuccess(favourites: List<FavouriteResponse>) {
+        _favouriteList.postValue(Either.Right(favourites))
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        snapshotListener?.remove()
+    private fun postError(error: String?) {
+        _favouriteList.postValue(Either.Left(error.orEmpty()))
     }
 }

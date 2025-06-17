@@ -2,7 +2,6 @@ package com.learning.tmdb_movie.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +12,7 @@ import com.learning.tmdb_movie.Util.formatDate
 import com.learning.tmdb_movie.Util.showToast
 import com.learning.tmdb_movie.adapter.CastAdapter
 import com.learning.tmdb_movie.databinding.ActivityDetailBinding
+import com.learning.tmdb_movie.model.Detail.CastItem
 import com.learning.tmdb_movie.model.Detail.DetailResponse
 import com.learning.tmdb_movie.model.Favourite.FavouriteResponse
 import com.learning.tmdb_movie.viewmodel.CreditViewModel
@@ -21,19 +21,45 @@ import com.learning.tmdb_movie.viewmodel.FavouriteViewModel
 import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel: DetailViewModel by viewModels()
     private val creditViewModel: CreditViewModel by viewModels()
     private val favouriteViewModel: FavouriteViewModel by viewModels()
-    private var movieId: Int = 0
+
+    private val movieId by lazy { intent.getIntExtra(INTENT_ID, 0) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        movieId = intent.getIntExtra(INTENT_ID, 0)
+        initializeBinding()
         setupObservers()
         loadData()
+    }
+
+    private fun initializeBinding() {
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupFavoriteToggle()
+    }
+
+    private fun setupFavoriteToggle() {
+        binding.tbFavorite.setOnCheckedChangeListener { _, isChecked ->
+            lifecycleScope.launch {
+                detailViewModel.detailMovie.value?.fold(
+                    { /* Error already handled */ },
+                    { _ -> toggleFavoriteStatus(isChecked) }
+                )
+            }
+        }
+    }
+
+    private fun toggleFavoriteStatus(isChecked: Boolean) {
+        favouriteViewModel.toggleFavourite(
+            FavouriteResponse(
+                movieId = movieId,
+                isFavourite = isChecked
+            )
+        )
     }
 
     private fun loadData() {
@@ -44,62 +70,68 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
+        observeMovieDetails()
+        observeCastList()
+        observeFavorites()
+    }
+
+    private fun observeMovieDetails() {
         detailViewModel.detailMovie.observe(this) { response ->
             response.fold(
-                { error -> showToast(error) },
-                { details -> setupMovieDetails(details) }
+                ::showToast,
+                ::bindMovieDetails
             )
         }
+    }
 
+    private fun observeCastList() {
         creditViewModel.castList.observe(this) { response ->
             response.fold(
-                { error -> showToast(error) },
-                { castList ->
-                    binding.rvCast.rvMain.adapter = CastAdapter(castList)
-                }
+                ::showToast,
+                ::setupCastAdapter
             )
         }
+    }
 
+    private fun observeFavorites() {
         favouriteViewModel.favouriteList.observe(this) { response ->
             response.fold(
-                { error -> showToast(error) },
-                { favList ->
-                    val isFav = favList.any { it.movieId == movieId }
-                    binding.tbFavorite.isChecked = isFav
-                }
+                ::showToast,
+                ::updateFavoriteStatus
             )
-        }
-
-        binding.tbFavorite.setOnCheckedChangeListener { _, isChecked ->
-            lifecycleScope.launch {
-                detailViewModel.detailMovie.value?.fold(
-                    { /* Error already handled */ },
-                    { details ->
-                        favouriteViewModel.toggleFavourite(
-                            FavouriteResponse(
-                                movieId = movieId,
-                                isFavourite = isChecked
-                            )
-                        )
-                    }
-                )
-            }
         }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setupMovieDetails(details: DetailResponse) {
+    private fun bindMovieDetails(details: DetailResponse) {
         with(binding) {
-            Glide.with(this@DetailActivity)
-                .load(IMAGE_BASE_URL + details.backdropPath)
-                .into(ivBackdrop)
-
+            loadBackdropImage(details.backdropPath)
             tvMovieTitle.text = details.title
-            tvReleaseInfo.text = "${details.productionCountries?.firstOrNull()?.iso31661} | ${formatDate(details.releaseDate.orEmpty())}"
+            tvReleaseInfo.text = formatReleaseInfo(details)
             tvRating.text = details.voteAverage.toString()
-            tvVotes.text = details.voteCount.toString()
+            tvVotes.text = "${details.voteCount} votes"
             tvLanguage.text = details.spokenLanguages?.firstOrNull()?.name
-            tvDescriptionTitle.text = details.overview
+            tvDescription.text = details.overview
         }
+    }
+
+    private fun loadBackdropImage(backdropPath: String?) {
+        Glide.with(this)
+            .load(IMAGE_BASE_URL + backdropPath)
+            .into(binding.ivBackdrop)
+    }
+
+    private fun formatReleaseInfo(details: DetailResponse): String {
+        return "${details.productionCountries?.firstOrNull()?.iso31661} | ${
+            formatDate(details.releaseDate.orEmpty())
+        }"
+    }
+
+    private fun setupCastAdapter(castList: List<CastItem>) {
+        binding.rvCast.rvMain.adapter = CastAdapter(castList)
+    }
+
+    private fun updateFavoriteStatus(favList: List<FavouriteResponse>) {
+        binding.tbFavorite.isChecked = favList.any { it.movieId == movieId }
     }
 }

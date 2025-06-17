@@ -35,11 +35,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Meg 2: The Trench"
+                android:maxLines="2"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tbFavorite"/>
 
             <!-- Release Date and Country -->
             <TextView
@@ -56,16 +58,19 @@
             <!-- Duration and Genres -->
             <TextView
                 android:id="@+id/tvDurationGenres"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
                 android:text="1hr 56min | Action, Science Fiction, Horror"
                 android:maxLines="2"
-                android:textColor="#666666"
+                android:ellipsize="end"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/tvReleaseInfo"
                 app:layout_constraintStart_toStartOf="parent"
-                android:paddingEnd="24dp"/>
+                app:layout_constraintEnd_toStartOf="@id/tvLanguage"/>
 
             <ToggleButton
                 android:id="@+id/tbFavorite"
@@ -98,7 +103,7 @@
                 android:id="@+id/tvVotes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1593 votes"
+                android:text="1593"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 app:layout_constraintTop_toTopOf="@id/tvReleaseInfo"
@@ -117,7 +122,8 @@
                 app:layout_constraintTop_toTopOf="@id/tvDurationGenres"
                 app:layout_constraintBottom_toBottomOf="@id/tvDurationGenres"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"/>
+                android:layout_marginEnd="16dp"
+                android:paddingStart="32dp"/>
 
             <!-- Description Title -->
             <TextView
@@ -167,8 +173,19 @@
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tvViewAll"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvViewAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View All"
+                android:textSize="18sp"
+                android:textColor="?attr/colorError"
+                app:layout_constraintStart_toEndOf="@id/tvCastTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvCastTitle"/>
 
             <include
                 android:id="@+id/rvCast"
