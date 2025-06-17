@@ -1,12 +1,10 @@
 package com.learning.tmdb_movie.viewmodel
 
-import android.widget.ToggleButton
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import arrow.core.Either
-import arrow.core.right
-import com.learning.tmdb_movie.model.MovieDetail.DetailResponse
+import com.learning.tmdb_movie.model.Detail.DetailResponse
 import com.learning.tmdb_movie.repository.DetailRepository
 
 class DetailViewModel : ViewModel() {
@@ -23,11 +21,5 @@ class DetailViewModel : ViewModel() {
             .onFailure { throwable ->
                 _detailMovie.postValue(Either.Left(throwable.toString()))
             }
-    }
-
-    suspend fun ToggleButton.isFavourite() : Boolean {
-        return if(this.isChecked){
-            this
-        }
     }
 }

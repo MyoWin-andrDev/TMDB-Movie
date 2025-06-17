@@ -44,7 +44,5 @@ data class MovieEntityModel(
     val adult: Boolean? = null,
 
     @SerializedName("vote_count")
-    val voteCount: Int? = null,
-
-    val isFavourite : Favourite? = null
+    val voteCount: Int? = null
 )

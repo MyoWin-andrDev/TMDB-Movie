@@ -1,6 +1,5 @@
 package com.learning.tmdb_movie.repository
 
-import com.learning.tmdb_movie.Util.getErrorMessage
 import com.learning.tmdb_movie.Util.safeApiCall
 import com.learning.tmdb_movie.model.MovieEntityModel
 import com.learning.tmdb_movie.service.network.reponse.MovieAPIService

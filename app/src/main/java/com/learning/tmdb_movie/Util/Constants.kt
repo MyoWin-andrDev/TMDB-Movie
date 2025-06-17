@@ -14,7 +14,7 @@ const val INTENT_ID = "MOVIE_ID"
 //Detail API ENDPOINT
 const val DETAIL_ENDPOINT = ""
 //Headers
-const val AUTHENTICATION = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNzcxNDkwMjY5MjJiZmQ0YTY4MmYyZWFiYTNkOGFiZiIsIm5iZiI6MTcyOTM1NzY1NS45MDMsInN1YiI6IjY3MTNlNzU3OTlmMjJmMzI2YWFkMjJhOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3U7gKSIZzK6vT95GbH7iFmSOYcEstk1vBKCx9sLwPtU"
+const val AUTHENTICATION = "Bearer *******************************************************"
 const val ACCEPT = "application/json"
 //API PARAMS
 const val LANGUAGE = "en-US"
@@ -24,4 +24,8 @@ const val FAV_COLLECTION = "FAVOURITES"
 //Operation Status
 const val ADD_MSG = "Added to favourite"
 const val REMOVE_MSG = "Removed from favourite"
-const val FAILED_MSG = "Favorite update failed"
+//Error
+const val INIT_LOAD_FAILED = "Initial load failed:"
+const val FIRE_STORE_ERROR = "Firestore Error "
+const val REAL_TIME_ERROR = "Real-time update error"
+const val TOGGLE_ERROR = "Toggle Failed :"

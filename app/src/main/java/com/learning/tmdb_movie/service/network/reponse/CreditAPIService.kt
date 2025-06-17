@@ -2,9 +2,7 @@ package com.learning.tmdb_movie.service.network.reponse
 
 import com.learning.tmdb_movie.Util.ACCEPT
 import com.learning.tmdb_movie.Util.AUTHENTICATION
-import com.learning.tmdb_movie.model.MovieDetail.CastItem
-import com.learning.tmdb_movie.model.MovieDetail.CreditsResponse
-import com.learning.tmdb_movie.model.MovieDetail.DetailResponse
+import com.learning.tmdb_movie.model.Detail.CreditsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header

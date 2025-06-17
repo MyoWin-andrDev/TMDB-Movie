@@ -71,7 +71,7 @@
                 android:id="@+id/tbFavorite"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/ic_favourite"
+                android:background="@drawable/bg_favourite_detail"
                 android:textOff=""
                 android:textOn=""
                 app:layout_constraintEnd_toStartOf="@id/tvRating"

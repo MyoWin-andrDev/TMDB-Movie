@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.learning.tmdb_movie" />
+                  <option name="mobileSdkAppId" value="1:39559741607:android:7d977bbe46e9b7ad539b82" />
+                  <option name="projectId" value="tmdb-movie-44a8c" />
+                  <option name="projectNumber" value="39559741607" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
