@@ -1,4 +1,4 @@
-package com.learning.tmdb_movie.model.Detail
+package com.learning.tmdb_movie.model.dto.response.credits
 
 import com.google.gson.annotations.SerializedName
 

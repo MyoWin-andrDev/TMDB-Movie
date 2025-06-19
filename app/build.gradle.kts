@@ -1,9 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.google.gms.google.services)
 }
-
+val a23bCx12A67: String by project
 android {
     namespace = "com.learning.tmdb_movie"
     compileSdk = 35
@@ -16,7 +15,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildFeatures {
+            buildConfig = true
+        }
+
+        buildConfigField("String", "a23bCx12A67", "\"$a23bCx12A67\"")
+
     }
+
+
 
     buildTypes {
         release {
@@ -30,6 +38,7 @@ android {
             enable = true
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -50,21 +59,22 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     //Retrofit Dependency
-    implementation (libs.gson)
-    implementation (libs.retrofit.v290)
-    implementation (libs.converter.gson.v290)
+    implementation(libs.gson)
+    implementation(libs.retrofit.v290)
+    implementation(libs.converter.gson.v290)
     //ViewModel Dependency
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     // Glide for image loading
-    implementation ("com.github.bumptech.glide:glide:4.15.1")
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
     //Arrow
-    implementation(platform("io.arrow-kt:arrow-stack:2.1.0"))
-    implementation("io.arrow-kt:arrow-core:2.1.0")
+    implementation(platform(libs.arrow.stack))
+    implementation(libs.arrow.core)
     //OKHTTP Interceptor(To Know Error On Network Calls)
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-    //FireStore
-    implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
-    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation(libs.logging.interceptor)
+
+    implementation(libs.androidx.datastore.preferences)
+
+
 }

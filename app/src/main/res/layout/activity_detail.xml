@@ -11,199 +11,250 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ivBackdrop"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:scaleType="centerCrop"/>
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clDetails"
+            android:id="@+id/csMain"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivBackdrop"
-            android:padding="16dp">
+            android:layout_height="match_parent"
+            android:visibility="invisible">
 
-            <!-- Movie Title -->
-            <TextView
-                android:id="@+id/tvMovieTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Meg 2: The Trench"
-                android:maxLines="2"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tbFavorite"/>
-
-            <!-- Release Date and Country -->
-            <TextView
-                android:id="@+id/tvReleaseInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="CN | January 2, 2023"
-                android:textColor="#666666"
-                android:textSize="14sp"
-                app:layout_constraintTop_toBottomOf="@id/tvMovieTitle"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <!-- Duration and Genres -->
-            <TextView
-                android:id="@+id/tvDurationGenres"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="16dp"
-                android:text="1hr 56min | Action, Science Fiction, Horror"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textColor="?attr/colorPrimary"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/tvReleaseInfo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tvLanguage"/>
-
-            <ToggleButton
-                android:id="@+id/tbFavorite"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/bg_favourite_detail"
-                android:textOff=""
-                android:textOn=""
-                app:layout_constraintEnd_toStartOf="@id/tvRating"
-                app:layout_constraintTop_toTopOf="@id/tvRating"
-                app:layout_constraintBottom_toBottomOf="@id/tvRating"
-                android:layout_marginEnd="8dp"/>
-
-            <!-- Rating Percentage -->
-            <TextView
-                android:id="@+id/tvRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="7.7%"
-                android:textColor="#4CAF50"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="@id/tvMovieTitle"
-                app:layout_constraintBottom_toBottomOf="@id/tvMovieTitle"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <!-- Votes Count -->
-            <TextView
-                android:id="@+id/tvVotes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1593"
-                android:textColor="#666666"
-                android:textSize="14sp"
-                app:layout_constraintTop_toTopOf="@id/tvReleaseInfo"
-                app:layout_constraintBottom_toBottomOf="@id/tvReleaseInfo"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"/>
-
-            <!-- Language -->
-            <TextView
-                android:id="@+id/tvLanguage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="English"
-                android:textColor="#666666"
-                android:textSize="14sp"
-                app:layout_constraintTop_toTopOf="@id/tvDurationGenres"
-                app:layout_constraintBottom_toBottomOf="@id/tvDurationGenres"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"
-                android:paddingStart="32dp"/>
-
-            <!-- Description Title -->
-            <TextView
-                android:id="@+id/tvDescriptionTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Movie Description"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@id/tvLanguage"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <!-- Description Content -->
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="An exploratory dive into the deepest depths of the ocean of a daring research team spirals into chaos when a malevolent mining operation threatens their mission and forces them into a high-stakes battle for survival."
-                android:textColor="#666666"
-                android:textSize="16sp"
-                android:lineSpacingExtra="4dp"
-                app:layout_constraintTop_toBottomOf="@id/tvDescriptionTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clCast"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clDetails"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp">
-
-            <TextView
-                android:id="@+id/tvCastTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Cast"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tvViewAll"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:id="@+id/tvViewAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="View All"
-                android:textSize="18sp"
-                android:textColor="?attr/colorError"
-                app:layout_constraintStart_toEndOf="@id/tvCastTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tvCastTitle"/>
-
-            <include
-                android:id="@+id/rvCast"
+            <FrameLayout
+                android:id="@+id/flBackDrop"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                app:layout_constraintTop_toBottomOf="@id/tvCastTitle"
-                layout="@layout/rv_layout"
-                android:layout_marginTop="16dp"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rvCast"
-                android:text="Book Tickets"/>
+                app:layout_constraintTop_toTopOf="parent">
 
+                <ImageView
+                    android:id="@+id/ivBackdrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvBackArrow"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:alpha="0.6"
+                    app:cardBackgroundColor="#000000"
+                    app:cardCornerRadius="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivBackArrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/baseline_arrow_back_24" />
+                </com.google.android.material.card.MaterialCardView>
+
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/flBackDrop">
+
+                <!-- Movie Title -->
+                <TextView
+                    android:id="@+id/tvMovieTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="Meg 2: The Trench"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/ivFav"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Release Date and Country -->
+                <TextView
+                    android:id="@+id/tvReleaseInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="CN | January 2, 2023"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvMovieTitle" />
+
+                <!-- Duration and Genres -->
+                <TextView
+                    android:id="@+id/tvDurationGenres"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="1hr 56min | Action, Science Fiction, Horror"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tvLanguage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvReleaseInfo" />
+
+
+                <ImageView
+                    android:id="@+id/ivFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_favorite"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvRating"
+                    app:layout_constraintEnd_toStartOf="@+id/tvRating"
+                    app:layout_constraintTop_toTopOf="@+id/tvRating" />
+                <!-- Rating Percentage -->
+                <TextView
+                    android:id="@+id/tvRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="7.7%"
+                    android:textColor="#4CAF50"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/tvMovieTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvMovieTitle" />
+
+                <!-- Votes Count -->
+                <TextView
+                    android:id="@+id/tvVotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="1593"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tvReleaseInfo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvReleaseInfo" />
+
+                <!-- Language -->
+                <TextView
+                    android:id="@+id/tvLanguage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:paddingStart="32dp"
+                    android:text="English"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tvDurationGenres"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvDurationGenres" />
+
+                <!-- Description Title -->
+                <TextView
+                    android:id="@+id/tvDescriptionTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Movie Description"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLanguage" />
+
+                <!-- Description Content -->
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:lineSpacingExtra="4dp"
+                    android:text="An exploratory dive into the deepest depths of the ocean of a daring research team spirals into chaos when a malevolent mining operation threatens their mission and forces them into a high-stakes battle for survival."
+                    android:textColor="#666666"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDescriptionTitle" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clCast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/clDetails">
+
+                <TextView
+                    android:id="@+id/tvCastTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Cast"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvViewAll"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvViewAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View All"
+                    android:textColor="?attr/colorError"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvCastTitle"
+                    app:layout_constraintTop_toTopOf="@id/tvCastTitle" />
+
+                <include
+                    android:id="@+id/rvCast"
+                    layout="@layout/rv_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvCastTitle" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:text="Book Tickets"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvCast" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminateTint="@color/md_theme_primary"
+            android:indeterminateTintMode="src_in"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

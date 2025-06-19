@@ -1,9 +1,9 @@
 package com.learning.tmdb_movie.repository
 
-import com.learning.tmdb_movie.Util.safeApiCall
-import com.learning.tmdb_movie.model.Detail.CastItem
-import com.learning.tmdb_movie.service.network.reponse.CreditAPIService
-import com.learning.tmdb_movie.service.network.reponse.RetrofitInstance
+import com.learning.tmdb_movie.util.safeApiCall
+import com.learning.tmdb_movie.model.dto.response.credits.CastItem
+import com.learning.tmdb_movie.service.network.CreditAPIService
+import com.learning.tmdb_movie.service.network.RetrofitInstance
 
 class CreditRepository {
     val apiService : CreditAPIService by lazy { RetrofitInstance.getInstance().create(

@@ -1,4 +1,4 @@
-package com.learning.tmdb_movie.model.Detail
+package com.learning.tmdb_movie.model.dto.response.detail
 
 import com.google.gson.annotations.SerializedName
 
@@ -15,9 +15,6 @@ data class DetailResponse(
 
 	@field:SerializedName("release_date")
 	val releaseDate: String? = null,
-
-	@field:SerializedName("genres")
-	val genres: List<GenresItem?>? = null,
 
 	@field:SerializedName("vote_average")
 	val voteAverage: Any? = null,
@@ -39,12 +36,6 @@ data class DetailResponse(
 )
 
 data class SpokenLanguagesItem(
-
-	@field:SerializedName("name")
-	val name: String? = null
-)
-
-data class GenresItem(
 
 	@field:SerializedName("name")
 	val name: String? = null

@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.learning.tmdb_movie.Util.IMAGE_BASE_URL
+import com.learning.tmdb_movie.util.IMAGE_BASE_URL
 import com.learning.tmdb_movie.databinding.ListItemCastBinding
-import com.learning.tmdb_movie.model.Detail.CastItem
+import com.learning.tmdb_movie.model.dto.response.credits.CastItem
 
 class CastAdapter(val castList : List<CastItem>) : RecyclerView.Adapter<CastAdapter.CastViewHolder>(){
     override fun onCreateViewHolder(

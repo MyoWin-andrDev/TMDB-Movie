@@ -3,23 +3,22 @@ package com.learning.tmdb_movie.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.learning.tmdb_movie.Util.IMAGE_BASE_URL
-import com.learning.tmdb_movie.Util.roundToDecimal
+import com.learning.tmdb_movie.R
 import com.learning.tmdb_movie.databinding.ListItemMovieBinding
-import com.learning.tmdb_movie.model.MovieEntityModel
-import com.learning.tmdb_movie.model.Favourite.FavouriteResponse
-import kotlin.math.round
+import com.learning.tmdb_movie.model.dto.response.movie.MovieItemModel
+import com.learning.tmdb_movie.util.IMAGE_BASE_URL
+import com.learning.tmdb_movie.util.roundToDecimal
 
 
 @SuppressLint("NotifyDataSetChanged")
 
 class MovieListAdapter(
-    private var movieList: List<MovieEntityModel>,
-    private var favouriteList: List<FavouriteResponse>,
+    private var movieList: List<MovieItemModel>,
+    private val onFavClick: (Int) -> Unit,
     private val onItemClick: (movieId: Int) -> Unit,
-    private val toggleFavouriteClick: (movieFav: FavouriteResponse) -> Unit
 ) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
     inner class MovieViewHolder(
@@ -27,26 +26,26 @@ class MovieListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
-        fun bind(movie: MovieEntityModel) {
+        fun bind(movie: MovieItemModel) {
             // Set movie data
             binding.tvTitle.text = movie.title
             binding.tvRating.text = "${movie.voteAverage!!.roundToDecimal(1)}%"
+            binding.ivFavorite.setOnClickListener {
+                onFavClick(movie.id!!)
+            }
+
+            val colorRes =
+                if (movie.isFavorite) R.color.red else R.color.grey
+            binding.ivFavorite.imageTintList =
+                ContextCompat.getColorStateList(binding.root.context, colorRes)
 
             Glide.with(binding.root.context)
                 .load(IMAGE_BASE_URL + movie.posterPath)
                 .into(binding.ivPoster)
 
-            // Set favorite state
-            binding.tbFavorite.setOnCheckedChangeListener(null)
-            binding.tbFavorite.isChecked = favouriteList.any { it.movieId == movie.id }
 
             // Set click listeners
             binding.cvMain.setOnClickListener { movie.id?.let(onItemClick) }
-            binding.tbFavorite.setOnCheckedChangeListener { _, isChecked ->
-                movie.id?.let { id ->
-                    toggleFavouriteClick(FavouriteResponse(id, isFavourite = isChecked))
-                }
-            }
         }
     }
 
@@ -65,13 +64,8 @@ class MovieListAdapter(
 
     override fun getItemCount(): Int = movieList.size
 
-    fun updateMovieList(newList: List<MovieEntityModel>) {
+    fun updateMovieList(newList: List<MovieItemModel>) {
         movieList = newList
-        notifyDataSetChanged()
-    }
-
-    fun updateFavourites(newFavourites: List<FavouriteResponse>) {
-        favouriteList = newFavourites
         notifyDataSetChanged()
     }
 

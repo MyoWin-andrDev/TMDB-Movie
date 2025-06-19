@@ -1,14 +1,10 @@
-package com.learning.tmdb_movie.Util
+package com.learning.tmdb_movie.util
 
 import android.content.Context
-import android.os.Build
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import retrofit2.Response
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 import kotlin.math.round
 
 
@@ -30,7 +26,7 @@ suspend fun <T, R> safeApiCall(
         val body = response.body()
         when{
             response.isSuccessful && body != null -> {
-                Result.success(onSuccess(body!!))
+                Result.success(onSuccess(body))
             }
             else -> {
                 val errorMsg = response.errorBody()?.string()?: "Unknown Error"
